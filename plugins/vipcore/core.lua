@@ -4,7 +4,7 @@ AddEventHandler("OnPluginStart", function(event)
 
     db:QueryBuilder():Table(tostring(config:Fetch("vips.table_name"))):Create({
         steamid = "string|max:128|unique",
-        groupid = "string|max:128|unique",
+        groupid = "string|max:128",
         expiretime = "integer",
         features_status = "json|default:{}"
     }):Execute(function (err, result)
@@ -33,7 +33,7 @@ function GetPluginAuthor()
 end
 
 function GetPluginVersion()
-    return "v1.0.2"
+    return "v1.0.3"
 end
 
 function GetPluginName()
