@@ -82,3 +82,19 @@ export("IsVip", function(playerid)
 
     return player:GetVar("vip.group") ~= "none"
 end)
+
+export("GetPlayerFeatures", function(playerid)
+    if playerid < 0 then return {} end
+    local player = GetPlayer(playerid)
+    if not player then return {} end
+    if player:IsFakeClient() then return {} end
+
+    --isvip player:GetVar("vip.group") ~= "none"
+    if player:GetVar("vip.group") == "none" then return {} end
+
+    local group = player:GetVar("vip.group")
+    local vipidx = GroupsMap[group]
+    if not vipidx then return {} end
+
+    return config:Fetch("vips.groups[" .. vipidx .. "].features")    
+end)
